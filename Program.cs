@@ -14,10 +14,10 @@
                 "down"
             };
             // makes a random to pick a word from the list
-            Random wordPickerIndex = new();
+            Random wordPicker = new();
             // creates a variable that stores our indexposition chosen by our random, taking words total count as maxvalue
             // picks the word randomly
-            var pickIndex = wordPickerIndex.Next(Words.Count);
+            var pickIndex = wordPicker.Next(Words.Count);
             // creates a string called currenthangmanword
             string currentHangManWord = Words[pickIndex];
             // prints the selected word
@@ -31,7 +31,6 @@
                 // adds a new position and calls to string on the read char to add it to our list of string characters
                 letterOfOurChosenWord.Add(u.ToString());
             }
-
             // sets the var characters left to the length of the randomly selected word
             var charactersLeft = currentHangManWord.Length + 5;
             // our input
@@ -43,11 +42,8 @@
             {
                 Console.WriteLine("\nWelcome to Hangman");
                 Console.WriteLine("A game where you have to guess letters in a word");
-
                 do
                 {
-
-
                     do
                     {
                         foreach (string item in letterOfOurChosenWord)
@@ -71,14 +67,14 @@
                         if (guessedLetters.Contains(guess))
                         {
                             Console.WriteLine("Dont be a fool... you already tried that!");
-
                         }
+
                         // disallows empty guesses, 
-                        if ((guess == string.Empty) || (guess == ""))
+                        if (guess == string.Empty)
                         {
                             Console.WriteLine("Your input was not acceptable. ONE letter please.");
-
                         }
+
                         // or guesses that exceeds one character
                         if (guess.Length > 1)
                         {
@@ -89,22 +85,20 @@
 
 
                     }// while guess is empty or input longer then 1
-                    while ((guess == string.Empty) || (guess == "") || (guess.Length > 1));
+                    while ((guess == string.Empty) || (guess.Length > 1));
+                    guessedLetters.Add(guess);
+
                     // tells you how many chances you got left
                     Console.WriteLine($"Your current chances left: {charactersLeft}");
                     //  shortens the game by 1 if you had a valid guess
                     charactersLeft--;
-
                     // will store our guessed letters
-                    guessedLetters.Add(guess);
-
-
 
                 } while (charactersLeft > 0);
+
                 Console.WriteLine("If you would like to play again, please enter y");
                 gameLoop = Console.ReadLine();
             }
-
             while (gameLoop == "y");
 
         }
