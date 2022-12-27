@@ -15,14 +15,12 @@
             };
             // makes a random to pick a word from the list
             Random wordPicker = new();
-
             // our input
             string guess;
             // list of our guess of single char strings
             List<string> guessedLetters = new();
             // main game functionality 
             string gameLoop;
-
             // do while gameloop equals y
             do
             {
@@ -33,8 +31,6 @@
                 var pickIndex = wordPicker.Next(Words.Count);
                 // creates a string called currenthangmanword
                 string currentHangManWord = Words[pickIndex];
-                // prints the selected word
-                Console.WriteLine(currentHangManWord);
                 // creates a list to fill with our characters from our randomly picked word
                 List<string> letterOfOurChosenWord = new();
                 // for every letter in the currentword, iteraate and add the character read to its own element position, thus creating a list of characters
@@ -44,6 +40,7 @@
                     // adds a new position and calls to string on the read char to add it to our list of string characters
                     letterOfOurChosenWord.Add(u.ToString());
                 }
+
                 // sets the var charactersleft to the length of the randomly selected word
                 var charactersLeft = currentHangManWord.Length;
                 // sets up a separate integer to evaluate our chances condition
@@ -51,10 +48,8 @@
                 // do while chances more then 0
                 do
                 {
-
                     // tells you how many chances you got left
                     Console.WriteLine($"Your current chances left: {chances}");
-
                     // prints out what we guessed, or what is left to guess
                     foreach (string item in letterOfOurChosenWord)
                     {
@@ -82,6 +77,7 @@
                         break;
 
                     }
+
                     // otherwise resets our charactersleft counter so we can try again
                     else
                     {
@@ -115,7 +111,6 @@
 
                     //  takes away a chance if you had a valid guess
                     chances--;
-
                     // and if you run out... all your base...
                     if (chances == 0)
                     {
@@ -124,7 +119,6 @@
 
                     // adds your guess to our list of guessedletters
                     guessedLetters.Add(guess);
-
                 } while (chances > 0);
 
                 // main gameloop controller, if you enter y, go again, otherwise, bye bye
@@ -132,6 +126,7 @@
                 gameLoop = Console.ReadLine();
             }
             while (gameLoop == "y");
+
         }
     }
 }
