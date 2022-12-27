@@ -18,16 +18,17 @@
             Random wordPicker = new();
             // our input
             string guess;
-            // list of our guess of single char strings
-            List<string> guessedLetters = new();
             // main game functionality 
             string gameLoop;
             // do while gameloop equals y
             do
             {
                 // clears our saved letters for the last round ( if any )
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Clear();
-                guessedLetters.Clear();
+                // list of our guess of single char strings
+                List<string> guessedLetters = new();
                 Console.WriteLine("\nWelcome to Hangman");
                 Console.WriteLine("A game where you have to guess letters in a word");
                 // creates a variable that stores our indexposition chosen by our random, taking words total count as maxvalue
@@ -58,6 +59,7 @@
                     foreach (string item in letterOfOurChosenWord)
                     {
                         // if our guessedletters is equal to our current element in iteration, print it , reads from a list of guessedletters
+                        
                         if (guessedLetters.Contains(item))
                         {
                             Console.Write(item);
@@ -75,7 +77,9 @@
                     // if we run out of characters, that means we have won the game, tells you and breaks the current do while iteration , but before, sets our  charactersleft integer back to length
                     if (charactersLeft == 0)
                     {
-                        Console.WriteLine("\nYou have won the game.");
+                        Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine("\n CONGRATULATIONS !!! You have won the game.");
                         break;
                     }
 
@@ -96,41 +100,53 @@
                             Console.WriteLine("Dont be a fool... you already tried that!");
                         }
 
-                        // adds your guess to our list of guessedletters if it doesnt contain it, and if its 1 letter
-                        if ((!guessedLetters.Contains(guess)) || (guess.Length == 1))
-                        { 
-                        guessedLetters.Add(guess);
+                        if (letterOfOurChosenWord.Contains(guess))
+                        {
+                            if (!guessedLetters.Contains(guess))
+                            {
+                                Console.WriteLine("Your guess was in our word! \n keep going!");
+                            }
                         }
 
+                        // if our guessedletters contains our guess, check underruling ifs
+                        if (!guessedLetters.Contains(guess))
+                        { 
+                            // if our guess is 1 char long
+                            if(guess.Length == 1)
+                            {
+                                // add it to the list of guesses
+                                guessedLetters.Add(guess);
+                                // if our letters from our word does NOT contain our guess,
+                                // and neither does your earlier tries
+                                // you lost a chance
+                                if (!letterOfOurChosenWord.Contains(guess))
+                                {
+                                    //  takes away a chance if you had a valid but incorrect guess
+                                    chances--;
+                                }
+                            }
+                        }
+                        // if your guess is NOT matched to any string in our list of the letter words.
                         if (!letterOfOurChosenWord.Contains(guess))
                         {
                             Console.WriteLine("Your guess was not in the word we looking for.");
-                            
                         }
 
-                        if (letterOfOurChosenWord.Contains(guess))
-                        {
-                            Console.WriteLine("Your guess was in our word! \n keep going!");
-                        }
                         // disallows empty guesses, 
                         if (guess == string.Empty)
                         {
                             Console.WriteLine("Your input was empty");
-                            
                         }
 
                         // or guesses that exceeds one character
                         if (guess.Length > 1)
                         {
                             Console.WriteLine("Single characters... pretty please with sugar on top");
-                            
                         }
 
                     }// while guess is empty or input longer then 1
                     while ((guess == string.Empty) || (guess.Length > 1) || (!guessedLetters.Contains(guess)));
 
-                    //  takes away a chance if you had a valid guess
-                    chances--;
                     // and if you run out... all your base...
                     if (chances == 0)
                     {
