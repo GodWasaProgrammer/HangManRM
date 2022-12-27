@@ -13,6 +13,7 @@
                 "right",
                 "down"
             };
+
             // makes a random to pick a word from the list
             Random wordPicker = new();
             // our input
@@ -24,6 +25,9 @@
             // do while gameloop equals y
             do
             {
+                // clears our saved letters for the last round ( if any )
+                Console.Clear();
+                guessedLetters.Clear();
                 Console.WriteLine("\nWelcome to Hangman");
                 Console.WriteLine("A game where you have to guess letters in a word");
                 // creates a variable that stores our indexposition chosen by our random, taking words total count as maxvalue
@@ -63,7 +67,7 @@
                         // else, dont print it
                         else
                         {
-                            Console.Write("_");
+                            Console.Write("_ ");
                         }
 
                     }
@@ -72,10 +76,7 @@
                     if (charactersLeft == 0)
                     {
                         Console.WriteLine("\nYou have won the game.");
-                        charactersLeft = currentHangManWord.Length;
-                        guessedLetters.Clear();
                         break;
-
                     }
 
                     // otherwise resets our charactersleft counter so we can try again
@@ -89,25 +90,44 @@
                     {
                         Console.WriteLine("\nType your guess");
                         guess = Console.ReadLine();
+
                         if (guessedLetters.Contains(guess))
                         {
                             Console.WriteLine("Dont be a fool... you already tried that!");
                         }
 
+                        // adds your guess to our list of guessedletters if it doesnt contain it, and if its 1 letter
+                        if ((!guessedLetters.Contains(guess)) || (guess.Length == 1))
+                        { 
+                        guessedLetters.Add(guess);
+                        }
+
+                        if (!letterOfOurChosenWord.Contains(guess))
+                        {
+                            Console.WriteLine("Your guess was not in the word we looking for.");
+                            
+                        }
+
+                        if (letterOfOurChosenWord.Contains(guess))
+                        {
+                            Console.WriteLine("Your guess was in our word! \n keep going!");
+                        }
                         // disallows empty guesses, 
                         if (guess == string.Empty)
                         {
                             Console.WriteLine("Your input was empty");
+                            
                         }
 
                         // or guesses that exceeds one character
                         if (guess.Length > 1)
                         {
                             Console.WriteLine("Single characters... pretty please with sugar on top");
+                            
                         }
 
                     }// while guess is empty or input longer then 1
-                    while ((guess == string.Empty) || (guess.Length > 1) || (guessedLetters.Contains(guess)));
+                    while ((guess == string.Empty) || (guess.Length > 1) || (!guessedLetters.Contains(guess)));
 
                     //  takes away a chance if you had a valid guess
                     chances--;
@@ -117,8 +137,6 @@
                         Console.WriteLine("whau u do dis, u are ze loser,\n all your base are belong to us");
                     }
 
-                    // adds your guess to our list of guessedletters
-                    guessedLetters.Add(guess);
                 } while (chances > 0);
 
                 // main gameloop controller, if you enter y, go again, otherwise, bye bye
