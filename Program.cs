@@ -64,9 +64,10 @@
                     Console.WriteLine($"Your current chances left: {chances}");
                     do
                     {
+
+
                         foreach (string item in letterOfOurChosenWord)
                         {
-
                             // if our guessedletters is equal to our current element in iteration, print it , reads from a list of guessedletters
                             if (guessedLetters.Contains(item))
                             {
@@ -80,18 +81,23 @@
                                 Console.Write("_");
                             }
 
-                            if (charactersLeft == 0)
-                            {
-                                Console.WriteLine("You have won the game.");
-                            }
 
 
                         }
 
+                        if (charactersLeft == 0)
+                        {
+                            Console.WriteLine("\nYou have won the game.");
+                            
+                        }
+
+                        else
+                        {
+                            charactersLeft = currentHangManWord.Length;
+                        }
 
                         Console.WriteLine("\nType your guess");
                         guess = Console.ReadLine();
-
                         if (guessedLetters.Contains(guess))
                         {
                             Console.WriteLine("Dont be a fool... you already tried that!");
@@ -114,37 +120,20 @@
                             Console.WriteLine("whau u do dis, u are ze loser,\n all your base are belong to us");
                         }
 
-
-
                     }// while guess is empty or input longer then 1
                     while ((guess == string.Empty) || (guess.Length > 1) || guessedLetters.Contains(guess));
 
+
                     guessedLetters.Add(guess);
-
-
 
                     //  takes away a chance if you had a valid guess
                     chances--;
-
-                    if (charactersLeft == 0)
-                    {
-                        Console.WriteLine("You have won ze game!1111oneone");
-                        break;
-                    }
-
-                    if (charactersLeft > 0)
-                    {
-                        // resets our counter for characters, dependent on the amount of iterations done on the print
-                        charactersLeft = currentHangManWord.Length;
-                    }
-
                 } while (chances > 0);
 
                 Console.WriteLine("If you would like to play again, please enter y");
                 gameLoop = Console.ReadLine();
             }
             while (gameLoop == "y");
-
         }
     }
 }
