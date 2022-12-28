@@ -105,6 +105,8 @@
                     {
                         Console.WriteLine("\nType your guess");
                         guess = Console.ReadLine();
+                        // takes away capitalization issues
+                        guess = guess.ToLower();
 
                         if (guessedLetters.Contains(guess))
                         {
