@@ -11,7 +11,15 @@
                 "mother",
                 "left",
                 "right",
-                "down"
+                "down",
+                "encyclopedia",
+                "cunnilingus",
+                "arthritis",
+                "december",
+                "international space station",
+                "ShowMeTheMoney",
+                "pneumonoultramicroscopicsilicovolcanoconiosis" // longest english word in the dictionary (( possibly disputed )
+
             };
 
             // makes a random to pick a word from the list
@@ -23,7 +31,7 @@
             // do while gameloop equals y
             do
             {
-                // clears our saved letters for the last round ( if any )
+
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Clear();
@@ -74,13 +82,16 @@
 
                     }
 
-                    // if we run out of characters, that means we have won the game, tells you and breaks the current do while iteration , but before, sets our  charactersleft integer back to length
+                    // if we run out of characters, that means we have won the game, tells you and breaks the current do while iteration
                     if (charactersLeft == 0)
                     {
                         Console.BackgroundColor = ConsoleColor.DarkGreen;
                         Console.ForegroundColor = ConsoleColor.Black;
-                        Console.WriteLine("\n CONGRATULATIONS !!! You have won the game.");
+                        Console.WriteLine("\n CONGRATULATIONS !!! You have WON the game.");
+                        // removes the word that you just figured out from the random pool
+                        Words.RemoveAt(pickIndex);
                         break;
+
                     }
 
                     // otherwise resets our charactersleft counter so we can try again
@@ -100,8 +111,10 @@
                             Console.WriteLine("Dont be a fool... you already tried that!");
                         }
 
+                        // if our list of letters of our random word contains our guess, evaluate next step
                         if (letterOfOurChosenWord.Contains(guess))
                         {
+                            // if our guessedletters list does NOT contain our guess, type
                             if (!guessedLetters.Contains(guess))
                             {
                                 Console.WriteLine("Your guess was in our word! \n keep going!");
@@ -129,6 +142,7 @@
                             }
 
                         }
+
                         // if your guess is NOT matched to any string in our list of the letter words.
                         if (!letterOfOurChosenWord.Contains(guess))
                         {
@@ -147,8 +161,8 @@
                             Console.WriteLine("Single characters... pretty please with sugar on top");
                         }
 
-                    }// while guess is empty or input longer then 1
-                    while ((guess == string.Empty) || (guess.Length > 1) || (!guessedLetters.Contains(guess)));
+                        // while empty guess OR length is more then 1, OR guessed letters does NOT contain our guess
+                    } while ((guess == string.Empty) || (guess.Length > 1) || (!guessedLetters.Contains(guess)));
 
                     // and if you run out... all your base...
                     if (chances == 0)
