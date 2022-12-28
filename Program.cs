@@ -16,8 +16,6 @@
                 "cunnilingus",
                 "arthritis",
                 "december",
-                "international space station",
-                "ShowMeTheMoney",
                 "pneumonoultramicroscopicsilicovolcanoconiosis" // longest english word in the dictionary (( possibly disputed )
 
             };
