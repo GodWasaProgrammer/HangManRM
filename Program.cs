@@ -59,7 +59,7 @@
                     foreach (string item in letterOfOurChosenWord)
                     {
                         // if our guessedletters is equal to our current element in iteration, print it , reads from a list of guessedletters
-                        
+
                         if (guessedLetters.Contains(item))
                         {
                             Console.Write(item);
@@ -106,13 +106,14 @@
                             {
                                 Console.WriteLine("Your guess was in our word! \n keep going!");
                             }
+
                         }
 
-                        // if our guessedletters contains our guess, check underruling ifs
+                        // if our guessedletters does not contains our guess, check underruling ifs
                         if (!guessedLetters.Contains(guess))
-                        { 
+                        {
                             // if our guess is 1 char long
-                            if(guess.Length == 1)
+                            if (guess.Length == 1)
                             {
                                 // add it to the list of guesses
                                 guessedLetters.Add(guess);
@@ -124,7 +125,9 @@
                                     //  takes away a chance if you had a valid but incorrect guess
                                     chances--;
                                 }
+
                             }
+
                         }
                         // if your guess is NOT matched to any string in our list of the letter words.
                         if (!letterOfOurChosenWord.Contains(guess))
