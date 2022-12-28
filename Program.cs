@@ -5,7 +5,7 @@
         static void Main()
         {
             // makes a list of words for our hangman game //
-            List<string> Words = new()
+            List<string> words = new()
             {
                 "poland",
                 "mother",
@@ -41,9 +41,9 @@
                 Console.WriteLine("A game where you have to guess letters in a word");
                 // creates a variable that stores our indexposition chosen by our random, taking words total count as maxvalue
                 // picks the word randomly
-                var pickIndex = wordPicker.Next(Words.Count);
+                var pickIndex = wordPicker.Next(words.Count);
                 // creates a string called currenthangmanword
-                string currentHangManWord = Words[pickIndex];
+                string currentHangManWord = words[pickIndex];
                 // creates a list to fill with our characters from our randomly picked word
                 List<string> letterOfOurChosenWord = new();
                 // for every letter in the currentword, iteraate and add the character read to its own element position, thus creating a list of characters
@@ -89,7 +89,7 @@
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine("\n CONGRATULATIONS !!! You have WON the game.");
                         // removes the word that you just figured out from the random pool
-                        Words.RemoveAt(pickIndex);
+                        words.RemoveAt(pickIndex);
                         break;
 
                     }
