@@ -2,6 +2,7 @@
 {
     internal class Program
     {
+        const int EXTRACHANCES = 5;
         static void Main()
         {
             // makes a list of words for our hangman game //
@@ -20,30 +21,33 @@
 
             };
 
-            // makes a random to pick a word from the list
-            Random wordPicker = new();
-            // our input
-            string guess;
             // main game functionality 
             string gameLoop;
             // do while gameloop equals y
             do
             {
-
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Clear();
+
+                Console.WriteLine("\nWelcome to Hangman");
+
+                Console.WriteLine("A game where you have to guess letters in a word");
+
                 // list of our guess of single char strings
                 List<string> guessedLetters = new();
-                Console.WriteLine("\nWelcome to Hangman");
-                Console.WriteLine("A game where you have to guess letters in a word");
-                // creates a variable that stores our indexposition chosen by our random, taking words total count as maxvalue
-                // picks the word randomly
-                var pickIndex = wordPicker.Next(words.Count);
-                // creates a string called currenthangmanword
-                string currentHangManWord = words[pickIndex];
                 // creates a list to fill with our characters from our randomly picked word
                 List<string> letterOfOurChosenWord = new();
+
+                // makes a random to pick a word from the list
+                Random wordPicker = new();
+
+                // creates a variable that stores our indexposition chosen by our random, taking words total count as maxvalue
+                // picks the word randomly
+                int pickIndex = wordPicker.Next(words.Count);
+                // creates a string called currenthangmanword
+                string currentHangManWord = words[pickIndex];
+
                 // for every letter in the currentword, iteraate and add the character read to its own element position, thus creating a list of characters
                 foreach (char u in currentHangManWord)
                 {
@@ -53,9 +57,9 @@
                 }
 
                 // sets the var charactersleft to the length of the randomly selected word
-                var charactersLeft = currentHangManWord.Length;
+                int charactersLeft = currentHangManWord.Length;
                 // sets up a separate integer to evaluate our chances condition
-                int chances = charactersLeft + 5;
+                int chances = charactersLeft + EXTRACHANCES;
                 // do while chances more then 0
                 do
                 {
@@ -89,7 +93,6 @@
                         // removes the word that you just figured out from the random pool
                         words.RemoveAt(pickIndex);
                         break;
-
                     }
 
                     // otherwise resets our charactersleft counter so we can try again
@@ -98,6 +101,8 @@
                         charactersLeft = currentHangManWord.Length;
                     }
 
+                    // our input
+                    string guess;
                     // do while for input validation logic
                     do
                     {
@@ -168,6 +173,7 @@
                     if (chances == 0)
                     {
                         Console.WriteLine("whau u do dis, u are ze loser,\n all your base are belong to us");
+                        Console.WriteLine($"The word we was looking for was:{currentHangManWord}");
                     }
 
                 } while (chances > 0);
