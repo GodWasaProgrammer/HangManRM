@@ -167,7 +167,8 @@
                         }
 
                         // while empty guess OR length is more then 1, OR guessed letters does NOT contain our guess
-                    } while ((guess == string.Empty) || (guess.Length > 1) || (!guessedLetters.Contains(guess)));
+                    }
+                    while ((guess == string.Empty) || (guess.Length > 1) || (!guessedLetters.Contains(guess)));
 
                     // and if you run out... all your base...
                     if (chances == 0)
@@ -176,7 +177,8 @@
                         Console.WriteLine($"The word we was looking for was:{currentHangManWord}");
                     }
 
-                } while (chances > 0);
+                }
+                while (chances > 0);
 
                 // main gameloop controller, if you enter y, go again, otherwise, bye bye
                 Console.WriteLine("If you would like to play again, please enter y");
