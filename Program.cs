@@ -39,15 +39,15 @@
                 // creates a list to fill with our characters from our randomly picked word
                 List<string> letterOfOurChosenWord = new();
 
+
                 // makes a random to pick a word from the list
                 Random wordPicker = new();
-
                 // creates a variable that stores our indexposition chosen by our random, taking words total count as maxvalue
                 // picks the word randomly
                 int pickIndex = wordPicker.Next(words.Count);
                 // creates a string called currenthangmanword
-                string currentHangManWord = words[pickIndex];
 
+                string currentHangManWord = words[pickIndex];
                 // for every letter in the currentword, iteraate and add the character read to its own element position, thus creating a list of characters
                 foreach (char u in currentHangManWord)
                 {
